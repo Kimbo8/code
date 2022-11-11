@@ -1,0 +1,25 @@
+import random
+candy = [0,0,0,0,0,0]
+def candys():
+    num = random.randrange(0,100)
+    if num < 15:
+        print("you have", candy[0], "butterfingers!" )
+        candy[0] = random.randrange(1,5)
+    elif num < 35:
+        print("you have", candy [1], "hersheys!")
+        candy[1] = random.randrange(1,5)
+    elif num < 70:
+        print("you have", candy [2], "pb cups!")
+        candy[2] = random.randrange(1,5)
+    elif num < 80:
+        print("you have", candy [3], "mandms!")
+        candy[3] = random.randrange(1,5)
+    elif num < 98:
+        print("you have", candy [4], "sourpatch!")
+        candy[4] = random.randrange(1,5)
+    else:
+        candy[5] = random.randrange(1,5)
+     
+    print(candy)
+candys()
+
