@@ -17,13 +17,25 @@ background = pygame.image.load("C:/Users/705137/Downloads/dungeon.jpg")
 
 torch = pygame.image.load("C:/Users/705137/Downloads/pixil-frame-0 (2).png")
 
+Link = pygame.image.load('C:/Users/705137/Downloads/link.png')
+Link.set_colorkey((255,0,255))
+
 #player variables
-xpos = 70 #xpos of player
-ypos = 200 #ypos of player
+xpos = 500 #xpos of player
+ypos = 100 #ypos of player
 vx = 2 #x velocity of player
 vy = 6 #y velocity of player
 keys = [False, False, False, False] #this list holds whether each key has been pressed
 isOnGround = False #this variable stops gravity from pulling you down more when on a platform
+
+frameWidth = 64
+frameHeight = 96
+RowNum = 0
+frameNum = 0
+ticker = 0
+
+controller = pygame.joystick.Joystick(0) 
+controller.init()
 
 #enemy variable
 enemy1= [200, 630, 0]
@@ -55,6 +67,10 @@ while not gameover: #GAME LOOP##################################################
     for event in pygame.event.get(): #quit game if x is pressed in top corner
         if event.type == pygame.QUIT:
             gameover = True
+            
+        xVel = controller.get_axis(0) #returns a number b/t -1 and 1
+        yVel = controller.get_axis(1) #returns a number b/t -1 and 1
+      
       
         if event.type == pygame.KEYDOWN: #keyboard input
             if event.key == pygame.K_LEFT:
@@ -95,7 +111,12 @@ while not gameover: #GAME LOOP##################################################
         isOnGround = False
         direction = UP
         pygame.mixer.Sound.play(jump) #play the jump sound
-    
+        
+    if yVel == -1 and isOnGround == True:
+        vy = -8
+        isOnGround = False
+        direction = UP
+        
     #function call
     enemyMove(enemy1)
     enemyMove(enemy2)
@@ -135,22 +156,42 @@ while not gameover: #GAME LOOP##################################################
         isOnGround = False
 
 
-    
-    #stop falling if on bottom of game screen
-    if ypos > 760:
+   
+    if ypos > 700:
         isOnGround = True
         vy = 0
-        ypos = 760
+        yVel = 0
+        ypos = 700
     
     #gravity
     if isOnGround == False:
-        vy+=.2 #notice this grows over time, aka ACCELERATION
-    
+        vy+=.2
 
+    
     #update player position
     xpos+=vx 
     ypos+=vy
+    xpos += int(xVel * 10)
+    #ypos += int(yVel * 10)
+
     
+    #ANIMATION-------------------------------------------        
+    if vx < 0 or xVel < 0:
+        RowNum =  0
+        ticker+=1
+        if ticker%5==0:
+            frameNum+=1
+        
+        if frameNum>7:
+            frameNum = 0            
+    if vx > 0 or xVel > 0:
+        RowNum = 1
+        ticker+=1
+        if ticker%5==0:
+            frameNum+=1
+        
+        if frameNum>7:
+            frameNum = 0  
   
     # RENDER Section--------------------------------------------------------------------------------
             
@@ -162,7 +203,8 @@ while not gameover: #GAME LOOP##################################################
     
     #screen.blit(themoon,(0,200))
     #draw player
-    pygame.draw.rect(screen, (100, 200, 100), (xpos, ypos, 20, 40))
+    screen.blit(Link,(xpos,ypos),(frameWidth*frameNum, RowNum*frameHeight, frameWidth, frameHeight))
+    #pygame.draw.rect(screen, (100, 200, 100), (xpos, ypos, 20, 40))
     #draw enemy
     pygame.draw.rect(screen, (255, 0, 10), (enemy1[0], enemy1[1], 20, 20))
     
