@@ -1,14 +1,10 @@
-
-
-
-#rooms/inventory-------------------------------------------
-
 inventory = []
 room = 1
 doExit = False
 while doExit == False:
     print("Youre Inventory", end = "")
     print(inventory)
+#room 1 -----------   
     if room == 1:
         print("You've entered the house, youre in the first room, looks like the living room, theres a rageddy lookin couch with a bunch of holes, on the oppisite side of it theres a old cracke television. There is only one other door in that room, you can go through it. Press 'H' or 'Help' for commands")
         choice = input()
@@ -16,27 +12,31 @@ while doExit == False:
             print("the couch is really old and crusty, theres something hidden under it! oh nice its a flashlight!")
             inventory.append("flashlight")
         elif choice == 'h' or choice == 'help':
-            print("Enter 'Door' or 'D' to open the doors, Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right ")
+            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         elif choice == 'door' or choice =='Door' or choice == 'd':
             room = 2
         else:
             print("no an option dummy!")
+#room 2----------------------------
     if room == 2:
-        print ("You are in room 2, there is a door to the right and a bookshelf to the left, there are other things but i dont feel like going into detail right now. anyway, enter 'door' to go through, or enter 'back' to go back to the previous room. ")
-        if choice == "rug" or choice == "look under rug":
+        print ("Youre in the first bedroom, theres a bed iin the corner of the room, you can look at the bed, there is a door to the right and a bookshelf to the left, there are other things but i dont feel like going into detail right now. anyway, enter 'door' to go through, or enter 'back' to go back to the previous room. ")
+        choice = input()
+        if choice == "look bed":
             print("you found a key")
             inventory.append("key")
-        choice = input()
-        if choice == 'back':
+        elif choice == 'back':
             room = 1
         elif choice == 'door':
             room = 3
         else:
             print("not an option, dummy")
+#room 3 ----------------------------------
     if room == 3:
-        print("you are in room 3 through the 'door' to the hallway or you can go 'back'")
+        print("you are in room 3 through the 'door' to the hallway or you can go 'back' theres a book on the floor")
         choice = input()
-        if choice == 'door':
+        if choice == 'back':
+            room = 2
+        elif choice == 'door':
           key = False
           for i in range(len(inventory)):
             if inventory [i] == "key":
@@ -44,23 +44,18 @@ while doExit == False:
                 if key == True:
                     print("you open the door with the key")
                     room = 4
-                else:
-                    print("the door is locked")
+          else:
+              print("the door is locked! Find the key!!")
         
-        elif choice == 'back':
-            room = 2
         else:
             print("not an option ")
-        
+#room 4-------------------------
     if room == 4:
-        print("you are in the begining of the hallway you can go to the room 1  or 2. press '1' or '2'. 'back' to go back or keep  'walking'")
-        if inventory[0] == 'wood sword':
-            print("the monster wasnt affected by your weak sword. you die.")
-            doExit = True
+        print("you are in the begining of the hallway you can go to the room on the left, it has a strange faded orange door with purple dots. It does not fit the vibe lmao. Or you can go to the room to the right, it has a black door with a small window at the top, now that fits the vibe")
         choice = input()
-        if choice == '1':
+        if choice == 'left':
             room = 6
-        elif choice == '2':
+        elif choice == 'right':
             room = 7
         elif choice == 'back':
             room = 3
@@ -68,23 +63,24 @@ while doExit == False:
             room = 5
         else:
             print("this door dont work.")
-        
+#room 5/ 
     if room == 5:
-        print("you are in at the bottom of the hallway, there are 3 room, enter 'stairs' to goto the attic, enter '3' to go to room 3, enter 'kitchen' to enter kitchen")
+        print("you are in at the bottom of the hallway, straight ahead theres omg its a kitchen! i love kitchens always a pleasure being in one.On the left you find a third room, this one has no door actually, looks like someone took it off the hinges.Lets look to the right -- ouuu looks like some stairs, maybe an attic? ")
         choice = input()
+        
         if choice == 'back':
             room = 4
-        elif choice == '3':
+        elif choice == 'left':
             room = 8
-        elif choice == 'stairs':
+        elif choice == 'right':
              room = 9
-        elif choice == 'kitchen':
+        elif choice == 'Forward':
             room = 10
         else:
             print("not an option")
         
     if room == 6:
-        print("you are in room 1 you can go to 'back' to the hallway.")
+        print("you are in the 'not the vibe' room you can go to 'back' to the hallway.")
         choice = input()
         if choice == 'back':
             room = 4
@@ -92,7 +88,7 @@ while doExit == False:
             print("not an option")
         
     if room == 7:
-        print("you are in room 2 you can go to 'back' to the hallway. also theres a  'bookshelf'.Maybe look into it and youll find a secert passage. maybe.")
+        print("you are in 'definitly the vibe' room you can go to 'back' to the hallway. also theres a  'bookshelf'.Maybe look into it and youll find a secert passage. maybe.")
         choice = input()
         if choice == 'back':
             room = 4
