@@ -1,0 +1,39 @@
+inventory = []
+ShopItems = ["Potion $5","Food $3", "Keys $10"]
+
+
+print("Your Items:", end = "")
+print (inventory)
+print("Shop Items:", end = "")
+print (ShopItems)
+
+Money = 20
+
+def shop(Money):
+    print("Welcome to the shop you have", Money, " dabloons")
+    potion= 5
+    while Money>0: 
+        choice = input("Press p for the potion, f for food and k for keys and q to wuit:")
+        if choice == "p":
+            print("You got a potion!")
+            inventory.append("potion")
+            damage = (potion)
+        else:
+            damage - (potion)
+            print("you dont hvae aneough  moent")
+        print("You got the potion for", damage)
+        Money -= damage
+        print("Your Items:", end = "")
+        print (inventory)
+        print("Shop Items:", end = "")
+        print (ShopItems)
+        
+        
+        print()
+    if Money <=0:
+        print("broke")
+    else:
+        print("u not broke")
+    return Money
+
+Money = shop(Money)
