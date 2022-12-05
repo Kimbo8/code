@@ -11,27 +11,43 @@ Money = 20
 
 def shop(Money):
     print("Welcome to the shop you have", Money, " dabloons")
-    potion= 5
-    while Money>0: 
+    while Money>0:
         choice = input("Press p for the potion, f for food and k for keys and q to wuit:")
-        if choice == "p":
-            print("You got a potion!")
+        if choice == "p" and Money >= 5:
+            damage = (5)
+            Money -= damage
+            print("You got a potion for", damage, "$. Now you have",Money, "$")
             inventory.append("potion")
-            damage = (potion)
+            print("Your Items:", end = "")
+            print (inventory)
+        elif choice == "k" and Money >= 10:
+            damage = (10)
+            Money -= damage
+            print("You got a key for", damage, "$. Now you have",Money, "$")
+            inventory.append("key")
+            print("Your Items:", end = "")
+            print (inventory)
+        elif choice == "f" and Money >= 3:
+            damage = (3)
+            Money -= damage
+            print("You got a food for", damage, "$. Now you have",Money, "$")
+            inventory.append("food")
+            print("Your Items:", end = "")
+            print (inventory)
+        elif choice == "q"
+        
+            
         else:
-            damage - (potion)
-            print("you dont hvae aneough  moent")
-        print("You got the potion for", damage)
-        Money -= damage
-        print("Your Items:", end = "")
-        print (inventory)
-        print("Shop Items:", end = "")
-        print (ShopItems)
+            print("you dont have enough money")
+            print("Your Items:", end = "")
+            print (inventory)
+            print("Shop Items:", end = "")
+            print (ShopItems)
         
         
         print()
     if Money <=0:
-        print("broke")
+        print(" u broke now")
     else:
         print("u not broke")
     return Money
