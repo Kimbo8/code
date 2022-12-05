@@ -1,42 +1,91 @@
+
+import random
+
+#-------------------------------------------------------------------
+playerHealth = 100
+
+def BattleSystem(monsterType, playerHealth):
+    monsterHealth=10
+    if monsterType == "Ghost":
+        monsterHealth = 10
+        print("Woah what was that, a ghost passes through you")
+    elif monsterType == "Skeleton":
+        print("Theres some skeletons in a the closet, omg theyre alive!")
+        monsterHealth = 10
+    elif monsterType == "cockroach":
+        monsterHealth = 10
+        print("ew ew a cockroach passed by your feet, squish it!!")
+        
+    while monsterHealth>0 and playerHealth >0:
+        if monsterType == "Ghost":
+            monsterAttack = random.randrange(1,5)
+        elif monsterType == "Skeleton":
+            monsterAttack = random.randrange(1,5)
+        elif monsterType == "cockroach":
+            monsterAttack = random.randrange(1,10)
+            
+       
+        
+        playerAttack = random.randrange(1,10)
+        print("You hit the", monsterType, " for ", playerAttack, "damage")
+        monsterHealth = monsterHealth-playerAttack
+        print(monsterType," health is now",monsterHealth)
+    
+    if monsterHealth<=0:
+        print("I went away!")
+    else:
+        print("you were defeated by the", monsterType)
+        return playerHealth
+#----------------------------------------------------------------------        
+        
+
+            
+
+#rooms/inventory-------------------------------------------
+
 inventory = []
 room = 1
 doExit = False
 while doExit == False:
     print("Youre Inventory", end = "")
     print(inventory)
-#room 1 -----------   
+#room 1 ----------
     if room == 1:
         print("You've entered the house, youre in the first room, looks like the living room, theres a rageddy lookin couch with a bunch of holes, on the oppisite side of it theres a old cracke television. There is only one other door in that room, you can go through it. Press 'H' or 'Help' for commands")
         choice = input()
-        if choice == 'look couch':
+        if choice == 'h' or choice == 'help':
+            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
+        elif choice == 'look couch':
             print("the couch is really old and crusty, theres something hidden under it! oh nice its a flashlight!")
             inventory.append("flashlight")
-        elif choice == 'h' or choice == 'help':
-            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
-        elif choice == 'door' or choice =='Door' or choice == 'd':
+        elif choice == 'f' or choice =='forward' or choice == 'Forward':
             room = 2
         else:
             print("no an option dummy!")
 #room 2----------------------------
     if room == 2:
-        print ("Youre in the first bedroom, theres a bed iin the corner of the room, you can look at the bed, there is a door to the right and a bookshelf to the left, there are other things but i dont feel like going into detail right now. anyway, enter 'door' to go through, or enter 'back' to go back to the previous room. ")
+        print ("Youre in the first bedroom, theres a bed iin the corner of the room, you can look at the bed, there is a door to the right and a bookshelf to the left, there are other things but i dont feel like going into detail right now. anyway, you can go through, or enter 'back' to go back to the previous room. ")
         choice = input()
         if choice == "look bed":
             print("you found a key")
             inventory.append("key")
+        elif choice == 'h' or choice == 'help':
+            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         elif choice == 'back':
             room = 1
-        elif choice == 'door':
+        elif choice == 'f' or choice =='forward' or choice == 'Forward':
             room = 3
         else:
             print("not an option, dummy")
 #room 3 ----------------------------------
     if room == 3:
-        print("you are in room 3 through the 'door' to the hallway or you can go 'back' theres a book on the floor")
+        print("you are in room 3, you can go forward to the next room or you can go 'back' theres a book on the floor")
         choice = input()
         if choice == 'back':
             room = 2
-        elif choice == 'door':
+        elif choice == 'h' or choice == 'help':
+            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
+        elif choice == 'f' or choice =='forward' or choice == 'Forward':
           key = False
           for i in range(len(inventory)):
             if inventory [i] == "key":
@@ -44,22 +93,25 @@ while doExit == False:
                 if key == True:
                     print("you open the door with the key")
                     room = 4
-          else:
-              print("the door is locked! Find the key!!")
+            else:
+                print("the door is locked! Find the key!!")
         
         else:
             print("not an option ")
 #room 4-------------------------
     if room == 4:
+        BattleSystem("Ghost", 100)
         print("you are in the begining of the hallway you can go to the room on the left, it has a strange faded orange door with purple dots. It does not fit the vibe lmao. Or you can go to the room to the right, it has a black door with a small window at the top, now that fits the vibe")
         choice = input()
         if choice == 'left':
             room = 6
+        elif choice == 'h' or choice == 'help':
+            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         elif choice == 'right':
             room = 7
         elif choice == 'back':
             room = 3
-        elif choice == 'walking':
+        elif choice == 'f' or choice =='forward' or choice == 'Forward':
             room = 5
         else:
             print("this door dont work.")
@@ -70,11 +122,13 @@ while doExit == False:
         
         if choice == 'back':
             room = 4
+        elif choice == 'h' or choice == 'help':
+            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         elif choice == 'left':
             room = 8
         elif choice == 'right':
              room = 9
-        elif choice == 'Forward':
+        elif choice == 'f' or choice =='forward' or choice == 'Forward':
             room = 10
         else:
             print("not an option")
@@ -84,6 +138,8 @@ while doExit == False:
         choice = input()
         if choice == 'back':
             room = 4
+        elif choice == 'h' or choice == 'help':
+            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         else:
             print("not an option")
         
@@ -92,6 +148,8 @@ while doExit == False:
         choice = input()
         if choice == 'back':
             room = 4
+        elif choice == 'h' or choice == 'help':
+            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         elif choice == 'bookshelf':
             print("omg you found a secret passage")
             room = 11
@@ -103,14 +161,20 @@ while doExit == False:
         choice = input()
         if choice == 'back':
             room = 5
+        elif choice == 'h' or choice == 'help':
+            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         else:
             print("not an option")
         
     if room == 9:
+        BattleSystem("cockroach", 100)
+        print("for now..")
         print("you are in the attic you can go to 'back' to the hallway.")
         choice = input()
         if choice == 'back':
             room = 5
+        elif choice == 'h' or choice == 'help':
+            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         else:
             print("not an option")
             
@@ -119,6 +183,8 @@ while doExit == False:
         choice = input()
         if choice == 'back':
             room = 5
+        elif choice == 'h' or choice == 'help':
+            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         else:
             print("not an option")
         
@@ -127,5 +193,7 @@ while doExit == False:
         choice = input()
         if choice == 'back':
             room = 4
+        elif choice == 'h' or choice == 'help':
+            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         else:
             print("not an option")
