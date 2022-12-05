@@ -10,9 +10,13 @@ print (ShopItems)
 Money = 20
 
 def shop(Money):
-    print("Welcome to the shop you have", Money, " dabloons")
-    while Money>0:
+    gameOver=False
+    while gameOver == False:
+        print("Welcome to the shop, you have", Money, "$.")
         choice = input("Press p for the potion, f for food and k for keys and q to wuit:")
+        if choice == 'q':
+            gameOver = True
+            print("goodbye")
         if choice == "p" and Money >= 5:
             damage = (5)
             Money -= damage
@@ -34,8 +38,6 @@ def shop(Money):
             inventory.append("food")
             print("Your Items:", end = "")
             print (inventory)
-        elif choice == "q"
-        
             
         else:
             print("you dont have enough money")
