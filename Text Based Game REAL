@@ -36,11 +36,60 @@ def BattleSystem(monsterType, playerHealth):
     else:
         print("you were defeated by the", monsterType)
         return playerHealth
-#----------------------------------------------------------------------        
-        
+#timer----------------------------------------------------------------------        
+import random
+inventory = []
+PlayerHealth = 100
 
-            
+def BossBattle(PlayerHealth):
+    MonsterHealth = 100
+    while MonsterHealth >0 and PlayerHealth>0:
+        if inventory[i] == "fire spell":
+            print("Omg the red bottle was a fire spell! It can catch anything on fire!")
+            damage = random.randrange(20,31)
+        elif inventory[i] == "sword":
+            print("luckliy you have a sword, you can fight him with it!")
+            damage = random.randrange(20,31)
+        else:
+            damage = random.randrange(5,11)
+        print("You hit the monster for", damage)
+        MonsterHealth -= damage
+        print("the monster now has", MonsterHealth, "health left.")
+        damage = random.randrange(5, 10)
+        print("You hit the monster for", damage)
+        PlayerHealth -= damage
+        print("You now have", PlayerHealth, "health left, the tiger has ", MonsterHealth, "health left")
+        choice = input("press p for potion, any other key to continue")
+        if choice == "p":
+            if inventory[1]=='potion':
+                print("oh look a potion, lemme drink glug glug glug (health+20)")
+                PlayerHealth +=20
+                inventory[1]="empty"
+            else:
+                print("sorry, you have no potion")
+        elif choice == 'h':
+            if inventory[2]=='ham':
+                print("you have feed the rtiger the hame, and is happy and goes away!")
+                MonsterHealth = 0
+            else:
+                print("the tiger is not happy that you ate the hame, decicdes to eat you")
+                PlayerHealth= 0
+                
+                
+        print()
+    if PlayerHealth <=0:
+        print("you lost the game")
+    else:
+        print("yo won th egame!")
+    return PlayerHealth
 
+#instruction--------------------
+def show_instruction():
+    print("You can press 'i', to show instructions and commands ")
+    choice = input()
+    if choice == 'i':
+        print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
+     
 #rooms/inventory-------------------------------------------
 
 inventory = []
@@ -51,11 +100,10 @@ while doExit == False:
     print(inventory)
 #room 1 ----------
     if room == 1:
-        print("You've entered the house, youre in the first room, looks like the living room, theres a rageddy lookin couch with a bunch of holes, on the oppisite side of it theres a old cracke television. There is only one other door in that room, you can go through it. Press 'H' or 'Help' for commands")
+        show_instruction() print("or press enter to continue")
+        print("You've entered the house, youre in the first room, looks like the living room, theres a rageddy lookin couch with a bunch of holes, on the oppisite side of it theres a old cracke television. There is only one other door in that room, you can go through it.")
         choice = input()
-        if choice == 'h' or choice == 'help':
-            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
-        elif choice == 'look couch':
+        if choice == 'look couch':
             print("the couch is really old and crusty, theres something hidden under it! oh nice its a flashlight!")
             inventory.append("flashlight")
         elif choice == 'f' or choice =='forward' or choice == 'Forward':
@@ -64,13 +112,14 @@ while doExit == False:
             print("no an option dummy!")
 #room 2----------------------------
     if room == 2:
-        print ("Youre in the first bedroom, theres a bed iin the corner of the room, you can look at the bed, there is a door to the right and a bookshelf to the left, there are other things but i dont feel like going into detail right now. anyway, you can go through, or enter 'back' to go back to the previous room. ")
+        print ("Youre in the first bedroom, theres a bed iin the corner of the room, you can look at the bed, there is a door to the right and a closet to the left. you can go through, or enter 'back' to go back to the previous room. ")
+        show_instruction()
         choice = input()
         if choice == "look bed":
             print("you found a key")
             inventory.append("key")
-        elif choice == 'h' or choice == 'help':
-            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
+        elif choice == "look closet":
+            room = 12
         elif choice == 'back':
             room = 1
         elif choice == 'f' or choice =='forward' or choice == 'Forward':
@@ -80,11 +129,10 @@ while doExit == False:
 #room 3 ----------------------------------
     if room == 3:
         print("you are in room 3, you can go forward to the next room or you can go 'back' theres a book on the floor")
+        show_instruction()
         choice = input()
         if choice == 'back':
             room = 2
-        elif choice == 'h' or choice == 'help':
-            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         elif choice == 'f' or choice =='forward' or choice == 'Forward':
           key = False
           for i in range(len(inventory)):
@@ -102,11 +150,10 @@ while doExit == False:
     if room == 4:
         BattleSystem("Ghost", 100)
         print("you are in the begining of the hallway you can go to the room on the left, it has a strange faded orange door with purple dots. It does not fit the vibe lmao. Or you can go to the room to the right, it has a black door with a small window at the top, now that fits the vibe")
+        show_instruction()
         choice = input()
         if choice == 'left':
             room = 6
-        elif choice == 'h' or choice == 'help':
-            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         elif choice == 'right':
             room = 7
         elif choice == 'back':
@@ -118,12 +165,10 @@ while doExit == False:
 #room 5/ 
     if room == 5:
         print("you are in at the bottom of the hallway, straight ahead theres omg its a kitchen! i love kitchens always a pleasure being in one.On the left you find a third room, this one has no door actually, looks like someone took it off the hinges.Lets look to the right -- ouuu looks like some stairs, maybe an attic? ")
+        show_instruction()
         choice = input()
-        
         if choice == 'back':
             room = 4
-        elif choice == 'h' or choice == 'help':
-            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         elif choice == 'left':
             room = 8
         elif choice == 'right':
@@ -135,22 +180,20 @@ while doExit == False:
         
     if room == 6:
         print("you are in the 'not the vibe' room you can go to 'back' to the hallway.")
+        show_instruction()
         choice = input()
         if choice == 'back':
             room = 4
-        elif choice == 'h' or choice == 'help':
-            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         else:
             print("not an option")
         
     if room == 7:
         print("you are in 'definitly the vibe' room you can go to 'back' to the hallway. also theres a  'bookshelf'.Maybe look into it and youll find a secert passage. maybe.")
+        show_instruction()
         choice = input()
         if choice == 'back':
             room = 4
-        elif choice == 'h' or choice == 'help':
-            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
-        elif choice == 'bookshelf':
+        elif choice == 'look bookshelf':
             print("omg you found a secret passage")
             room = 11
         else:
@@ -158,11 +201,10 @@ while doExit == False:
         
     if room == 8:
         print("you are in room 3 you can go to 'back' to the bottom of hallway.")
+        show_instruction()
         choice = input()
         if choice == 'back':
             room = 5
-        elif choice == 'h' or choice == 'help':
-            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         else:
             print("not an option")
         
@@ -170,30 +212,45 @@ while doExit == False:
         BattleSystem("cockroach", 100)
         print("for now..")
         print("you are in the attic you can go to 'back' to the hallway.")
+        show_instruction()
         choice = input()
         if choice == 'back':
             room = 5
-        elif choice == 'h' or choice == 'help':
-            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         else:
             print("not an option")
             
     if room == 10:
-        print("you are in the kitchen you can go to 'back' to the hallway.")
+        print("you are in the kitchen, theres a door! You can go forward or you can go to 'back' to the hallway.")
+        show_instruction()
         choice = input()
         if choice == 'back':
             room = 5
-        elif choice == 'h' or choice == 'help':
-            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
+        elif choice == 'f' or choice == 'forward' and inventory == []:
+            room = 13
+            
         else:
-            print("not an option")
+             print("not an option")
         
     if room == 11:
         print("you are in the secret room you can go to 'back' to room 2 .")
+        show_instruction()
         choice = input()
         if choice == 'back':
             room = 4
-        elif choice == 'h' or choice == 'help':
-            print("Enter 'Forward' or 'F ' to go to the next room ahead of you , Enter 'look(item)' to look at something, enter 'back' to go to previous room, enter 'left' to go to the left, enter 'right' to go to the right.")
         else:
             print("not an option")
+    if room == 12:
+        print("you find a single brown box, you can look at it or you can stop looking at the the box/ go back")
+        show_instruction()
+        choice = input()
+        if choice == "look box":
+            print("ouuu a yellow candle, and it smells like rubber! You can leave the closet now")
+            inventory.append("Yellow Candle")
+        elif choice == "back":
+            room = 2
+    if room == 13:
+        print("Youre free, youre freE!!, youve collected everything now to hand it all to the eitvh so she cans ave your dog.")
+        print("you hand it to the witch,she starts evil laughing<Muah ha ha> oh no shes actuaslly evil anf now turned into a giant  rat amd you have to fight her.")
+        PlayerHealth = BossBattle(PlayerHealth)
+        
+        
