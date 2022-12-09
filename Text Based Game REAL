@@ -136,10 +136,13 @@ while doExit == False:
             print("not an option, dummy")
 #room 3 ----------------------------------
     if room == 3:
-        print("you are in room 3, you can go forward to the next room or you can go 'back' theres a book on the floor")
+        print("you are in room 3, you can go forward to the next room or you can go 'back' theres a book on the floor, maybe its the mysetirious book!")
         choice = input()
         if choice == 'back':
             room = 2
+        elif choice == "look book":
+            print("its purple! you open it and awe it has blue pages not brown :(. oh no whats coming out of the book")
+            Battlesystem("Ghost", 10)
         elif choice == 'f' or choice =='forward' or choice == 'Forward':
           key = False
           for i in range(len(inventory)):
@@ -159,7 +162,7 @@ while doExit == False:
             print("not an option ")
 #room 4-------------------------
     if room == 4:
-        BattleSystem("Ghost", 5)
+        BattleSystem("Ghost", 0)
         print("you are in the begining of the hallway you can go to the room on the left, it has a strange faded orange door with purple dots. It does not fit the vibe lmao. Or you can go to the room to the right, it has a black door with a small window at the top, now that fits the vibe")
         choice = input()
         if choice == 'left':
@@ -280,13 +283,16 @@ while doExit == False:
             if inventory [i] == "long glove":
                 longGlove = True
                 if longGlove == True:
-                    print("you look at the toilet with the glove, omg you find a peice of glass and it says special mirror on it!")
+                    print("you look at the toilet with the glove, ow you got scratched you find a peice of glass and it says special mirror on it!")
+                    playerHealth -=20
                     inventory.remove("long glove")
                     print("the glove has been removed, inventory:", inventory)
                     inventory.append("glass")
                     break
             if longGlove == False:
                 print("Ew you cant put your bare hand in that crusty water!")
+        elif choice == 'look sink':
+            print("This water isnt too bad so ill let you put your hand in there, you find ")
         elif choice == 'i':
             show_instruction()
         else:
@@ -296,10 +302,13 @@ while doExit == False:
       
         BattleSystem("cockroach", 50)
         print("for now..")
-        print("you are in the attic you can go to 'back' to the hallway.")
+        print("you are in the attic theres just a bunch of 'boxes' everywhere, maybe theres something inside. you can go to 'back' to the hallway.")
         choice = input()
         if choice == 'back':
             room = 5
+        elif choice == 'look boxes':
+            print("you found the mysterious book!")
+            inventory.append("Mysterious Book")
         elif choice == 'i':
             show_instruction()
         else:
@@ -307,10 +316,26 @@ while doExit == False:
             
     if room == 10:
         
-        print("you are in the kitchen, theres a door! You can go forward or you can go to 'back' to the hallway.")
+        print("you are in the kitchen, theres a door`! Theres s 'stove' like right at the entarence, theres also a bunch of cabinetnts but you can only reach 3 so i guess you can only look at 3. You can go forward or you can go to 'back' to the hallway.")
         choice = input()
         if choice == 'back':
             room = 5
+        elif choice == "look stove":
+            print("i see something yellow. its a napkin, iy has a blue stain!!")
+            inventory.append("Yellow Napkin")
+        elif choice == 'look drawer 1':
+            print(" Youve opedn the first cabinents and find... a butt load of nothing damn wait sike another key!")
+            inventory.append('key 4')
+        elif choice == 'look cabinet 2':
+            print("youve opened the second cabinent, you find... Omg its a gray shirt!!, thats weird its in the kitchen")
+            inventory.append('Gray Shirt')
+        elif choice == 'look cabinet 3':
+            print("youve opened the 3rd cabinet, you find... just a empty jar, awww i wish it was the rice. *poof* omg the rice showed up its the colors you have to 'taste' it tho.")
+        
+        elif choice == 'taste':
+            print("yup its the rice!")
+            inventory.append('Cup of Rice')
+                  
         elif choice == 'f' or choice == 'forward' :
             items = False
             for i in range(len(inventory)):
@@ -332,11 +357,29 @@ while doExit == False:
         
     if room == 11:
         
-        print("you are in the secret room. hmm its kinda really creepy in here, it looks like some kind of lab oh look a skeleton, and ouu theres suspiciuos lookin cabinets, maybe we can find sum cool. Awe crap, the door locked behind you. .")
+        print("you are in the secret room. hmm its kinda really creepy in here, it looks like some kind of lab oh look a skeleton")
+        BattleSystem('skeleton')
+        print("ouu theres suspiciuos lookin 'cabinet', maybe we can find sum cool theres also a 'table' with something on it but a blanket is draped over it. Awe crap, the door locked behind you. ")
         choice = input()
         if choice == 'back':
-            
-            room = 4
+            key4 = False
+            for i in range(len(inventory)):
+                if inventory [i] == "key 4":
+                    key4 = True
+                    if key4 == True:
+                        print("you open the door with the key")
+                        inventory.remove("key 4")
+                        print("key 3 has been removed, inventory:", inventory)
+                        room = 7
+                        break
+                if key4 == False:
+                    print("you need to find the right key!")
+        elif choice == 'look table':
+            print("you uncover the things and awe its a teddy bear, and it has one eye! ou its kinda creepy..")
+            inventory.append("Teddy Bear")
+        elif choice == ' look cabinent':
+            print("omg you found a bottle with liquid in it")
+            inventory.append("Red Bottle")
         elif choice == 'i':
             show_instruction()
         else:
@@ -359,4 +402,5 @@ while doExit == False:
         print("Youre free, youre free!! Youve collected everything now to hand it all to the witch so she cans ave your dog.")
         print("you hand it to the witch,she starts evil laughing<Muah ha ha> oh no shes actuaslly evil anf now turned into a giant  rat amd you have to fight her.")
         PlayerHealth = BossBattle(PlayerHealth)
+        
         
