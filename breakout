@@ -1,0 +1,124 @@
+import pygame
+pygame.init()
+screen = pygame.display.set_mode((700,500))
+pygame.display.set_caption("breakout")
+import random
+
+class brick:
+    def __init__(self, xpos,ypos):
+        self.xpos = xpos
+        self.ypos = ypos
+        self.color = (random.randrange(100, 250), random.randrange(100, 250), random.randrange(100, 250))
+        self.isDead = False
+    def draw(self):
+        pygame.draw.rect(screen, self.color, (self.xpos, self.ypos, 70, 30))
+
+
+
+#variables to hold paddle position
+p1x = 300
+p1y = 350
+
+
+
+#ball variables
+bx = 350 # xposition
+by = 250 #yposition
+bVx = 5 #x velocity (horizontal speed)
+bVy = 5 #y velocity (vertical speed)
+
+b1 = brick(0, 50) #these go Above your game loop
+b2 = brick(70, 50) #these go Above your game loop
+b3 = brick(140,50)
+b4 = brick(210, 50) #these go Above your game loop
+b5 = brick(280, 50) #these go Above your game loop
+b6 = brick(350,50)
+b7 = brick(420, 50) #these go Above your game loop
+b8 = brick(490, 50) #these go Above your game loop
+b9 = brick(560,50)
+b10 = brick(630,50) #these go Above your game loop
+b11 = brick(700, 50) #these go Above your game loop
+b22 = brick(0,80)
+b12 = brick(70, 80) #these go Above your game loop
+b13 = brick(140,80)
+b14 = brick(210, 80) #these go Above your game loop
+b15 = brick(280, 80) #these go Above your game loop
+b16 = brick(350,80)
+b17 = brick(420, 80) #these go Above your game loop
+b18 = brick(490, 80) #these go Above your game loop
+b19 = brick(560,80)
+b20 = brick(630,80) #these go Above your game loop
+b21 = brick(700, 80) #these go Above your game loop
+
+# variable that runs game loop
+doExit = False
+
+#clock will be used to control how fast the screen updates
+clock = pygame.time.Clock()
+
+while not doExit:
+    #eventt queue stuff
+    clock.tick(60)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            doExit = True #Flag that we are done do we exit game loop
+            
+#game logic will go here----------------
+    
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        p1x-=5
+    if keys[pygame.K_RIGHT]:
+        p1x+=5
+        
+
+    #ball movement
+    bx += bVx
+    by += bVy
+    
+    # reflect ball off side walls of screeen
+    if bx < 0 or bx + 20 > 700:
+        bVx *= -1
+    elif by < 0 or by + 20 > 500:
+        bVy *= -1
+    #collison
+    if bx < p1x + 100: #is the ball left of the right side of the paddle
+        if by > p1y: #is the ball below the top edge of the paddle
+            if by < p1y + 20: #is the ball ABOVE the BOTTOM edge of the paddle
+                bVy *= -1 #reflect along x direction
+    #render section
+        
+    screen.fill((0,0,0))
+    
+    pygame.draw.rect(screen,(255,255,255),(p1x,p1y,100,20),1)
+    
+    pygame.draw.ellipse(screen, (255,255,255), (bx,by,20,20),1)
+    
+    b1.draw()
+    b2.draw()
+    b3.draw()
+    b4.draw()
+    b5.draw()
+    b6.draw()
+    b7.draw()
+    b8.draw()
+    b9.draw()
+    b10.draw()
+    b11.draw()
+    b12.draw()
+    b13.draw()
+    b14.draw()
+    b15.draw()
+    b16.draw()
+    b17.draw()
+    b18.draw()
+    b19.draw()
+    b20.draw()
+    b21.draw()
+    b22.draw()
+     #update the screen
+    pygame.display.flip()
+
+
+#END GAME LOOP ------------------------
+pygame.quit()
