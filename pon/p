@@ -1,0 +1,99 @@
+#include<iostream>
+using namespace std;
+
+
+
+#include "SFML/Graphics.hpp"
+
+int main() {
+
+
+	//game setup (you'll needthese two lines in every game)
+	sf::RenderWindow renderWindow(sf::VideoMode(500, 500), "Pong Paddle");
+    sf::Event event;
+
+
+    //paddle1 set up
+    sf::RectangleShape paddle1(sf::Vector2f(10.0f, 120.0f));
+    paddle1.setFillColor(sf::Color::White); //other colors: https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Color.php
+    paddle1.setPosition(20.0f, 250.0f); //set position: this is where the top left corner will be
+    
+    //paddle2 
+    sf::RectangleShape paddle2(sf::Vector2f(10.0f, 120.0f));
+    paddle2.setFillColor(sf::Color::White); //other colors: https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Color.php
+    paddle2.setPosition(480.0f, 250.0f); //set position: this is where the top left corner will be
+    
+    // Ball setup
+    float ballX = 250;
+    float ballY = 250;
+    float xVel = .02;
+    float yVel = .02;
+    sf::CircleShape ball(10);//sets radius of circle
+    ball.setFillColor(sf::Color(200,50, 50));
+    ball.setPosition(250, 250);
+
+
+   
+
+    //################### HOLD ONTO YOUR BUTTS, ITS THE GAME LOOP###############################################################
+    while (renderWindow.isOpen()) {//keep window open until user shuts it down
+        while (renderWindow.pollEvent(event)) { //look for events
+
+            //this checks if the user has clicked the little "x" button in the top right corner
+            if (event.type == sf::Event::EventType::Closed)
+                renderWindow.close();
+
+            //KEYBOARD INPUT (just one key to start
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { //checks if "W" is pressed
+                paddle1.move(0, -15); //move the rectangle 5 pixels UP on the y axis
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { 
+                paddle1.move(0, 15);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+                paddle2.move(0, -15);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) { 
+                paddle2.move(0, 15);
+            }
+        }
+        
+        //physics section---------------------------
+
+        //paddle collison
+        if (ballX - 10 < paddle1.getPosition().x - 10 && ballY > paddle1.getPosition().y && ballY < paddle1.getPosition().y + 120) {
+            cout << "paddle1 collison!" << endl;
+            //eventuallt add soiund effect here
+            xVel *= -1;
+        }
+        if (ballX + 10 > paddle2.getPosition().x - 10 && ballY > paddle2.getPosition().y && ballY < paddle2.getPosition().y + 120) {
+            cout << "paddle 2" << endl;
+            xVel *= -1;
+        }
+        //reflect off let and right walls
+        if (ballX < 0 || ballX >= 480) {
+          //  cout << "side wall" << endl;
+            xVel *= -1;
+        }
+        if (ballY < 0 || ballY >= 480) {
+            //cout << "top and bottom wall" << endl;
+            yVel *= -1;
+        }
+        //add speed to postion
+        ballX += xVel;
+        ballY += yVel;
+        //update ball
+        ball.setPosition(ballX, ballY);
+
+
+        //render section-----------------------------------------
+        renderWindow.clear(); //wipes screen, without this things smear
+        renderWindow.draw(paddle1); //you gotta drew each object
+        renderWindow.draw(paddle2);
+        renderWindow.draw(ball);
+        renderWindow.display(); //flips memory drawings onto screen
+
+    }//######################## end game loop ###################################################################################
+
+    ///cout << "goodbye!" << endl;
+} //end game
