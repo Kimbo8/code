@@ -1,0 +1,21 @@
+#include<iostream>
+using namespace std;
+
+void brown(double coconut);
+int main(){
+	
+	double mass;
+	while (1) {
+		cout << "What is the mass in Kilograms:" << endl;
+		cin >> mass;
+		brown(mass);
+	}
+}
+
+void brown(double coconut) {
+	double g = 6.674e-11;
+	double c = 2.998e8;
+	double radius;
+	radius = 2 * g * tam / (c * c);
+	cout <<"Radius is" <<  radius << endl;
+}
