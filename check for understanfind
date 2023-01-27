@@ -1,0 +1,92 @@
+#include<iostream>
+using namespace std;
+
+int main() {
+	
+	int cookie;
+
+	cout << "how many cookies do you have?" << endl;
+	cin >> cookie;
+	if (cookie < 5)
+		cout << "here have a cookie, you need it..." << endl;
+	else if (cookie >= 5 and cookie < 10)
+		cout << "I guess you have enough, but you can never have too much cookies" << endl;
+	else
+		cout << "thats tooooo much.... for YOU, but not for me so you should give me some" << endl;
+
+	//char best;
+
+	//cout << "which is best?: (b)art simpson, (s)cooby doo, (r)ick, (d)affy duck, (m)ario" << endl;
+	//cin >> best;
+	//if (best == 'b')
+	//	cout << "Eat my shorts" << endl;
+	//else if (best == 's')
+	//	cout << "scooby dooby doooooooo" << endl;
+	///else if (best == 'r')
+	//	cout << "wubba lubba dub duuuuubbbb" << endl;
+	//else if (best == 'd')
+	//	cout << " sufferin' succotash!" << endl;
+	//else if (best == 'm')
+	//	cout << "its a me mario" << endl;
+	//else
+		//cout << "not an option sorry" << endl;
+
+	char best;
+
+	cout << "which is best?: (b)art simpson, (s)cooby doo, (r)ick, (d)affy duck, (m)ario" << endl;
+	cin >> best;
+
+	switch (best) {
+	case 'b':
+		cout << "Eat my shorts" << endl;
+		break;
+	case 's':
+		cout << "scooby dooby doooooooo" << endl;
+		break;
+	case 'r':
+		cout << "wubba lubba dub duuuuubbbb" << endl;
+		break;
+	case 'd':
+		cout << " sufferin' succotash!" << endl;
+		break;
+	case 'm':
+		cout << "its a me mario" << endl;
+		break;
+	default:
+		cout << "not an option sorry" << endl;
+	}
+//	for (int i = 25; i < 46; i++)
+	//	cout << i << " ";
+	//cout << endl;
+
+//	for (int j = 90; j >= 70; j -=2)
+	//	cout << j << " ";
+	//cout << endl;
+
+	//for (int k = 10; k < 5000; k*=5)
+	//	cout << k << " ";
+	//cout << endl;
+
+	char sweets;
+	char sweets2;
+
+	cout << "do you want (i)ce cream or (c)andy?" << endl;
+	cin >> sweets;
+	cout << " Do you want c(h)ocolate or (f)ruit?" << endl;
+	cin >> sweets2;
+
+	if (sweets == 'i') {
+		if (sweets2 == 'h')
+			cout << "You get a hot fudge sundae" << endl;
+		else if (sweets2 == 'f')
+			cout << " you get a strawberry blizzard" << endl;
+	}
+	else if (sweets == 'c') {
+		if (sweets2 == 'h')
+			cout << "You get a hershy bar" << endl;
+		else if (sweets2 == 'f')
+			cout << " you get a starburst" << endl;
+	}
+	else
+		cout << "sory not an option" << endl;
+}
