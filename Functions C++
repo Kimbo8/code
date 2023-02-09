@@ -1,1 +1,45 @@
+#include<iostream>
+using namespace std;
 
+float ReactMult(char input1, char input2);
+
+int main() {
+
+	char choice = 'l';
+	char input1, input2;
+	while (choice != 'q') {
+		cout << "Enter two perameters" << endl;
+		cin >> input1;
+		cin >> input2;
+
+		if (input1 == 'q' || input2 == 'q') {
+			cout << "goodbye" << endl;
+			return 0;
+		}
+		cout << "fuction returns" << ReactMult(input1, input2) << endl << endl;
+	}
+}
+	
+	
+
+    float ReactMult(char input1, char input2) {
+
+	//check to make sure the parameters are correct
+	if (input1 != 'm' && input1 != 'v') {
+		cout << "Incorrect!" << endl;
+		return -1;
+	}
+	if (input2 != 'p' && input2 != 'c' && input2 != 'h') {
+		cout << "wrong" << endl;
+		return -1;
+	}
+	//the actual work of the function
+	if (input1 == 'm' && input2 == 'p')
+			return 2.0;
+	if (input1 == 'm' && input2 == 'c')
+		return 1.5;
+	if (input1 == 'v' && input2 == 'h')
+		return 2.0;
+	if (input1 == 'v' && input2 == 'p')
+		return 1.5;
+}
