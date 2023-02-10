@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+
+void brown(double coconut);
+
+int main() {
+	// For Loops
+	//for (int i = 4; i <= 44; i+=5)
+	//	cout << i << " ";
+
+	//cout << endl;
+
+	//for (int j = 100; j >= 20; j -= 10)
+	//	cout << j << " ";
+
+//cout << endl;
+//
+	//for (int k = 2; k <= 200; k *= 2)
+	//	cout << k << " ";
+	//cout << endl;
+//
+
+	// whlie loops
+
+
+
+	// function
+	
+		double radius;
+		while (1) {
+			cout << "What is radius:" << endl;
+			cin >> radius;
+			brown(radius);
+		}
+	}
+
+	void brown(double coconut) {
+		double p = 3.1415;
+		double circumfrance;
+		circumfrance = 2 * p * coconut;
+		cout << "cicrumfrance is " << circumfrance << endl;
+	}
