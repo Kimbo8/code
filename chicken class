@@ -1,0 +1,56 @@
+import random
+
+
+class Chicken:
+    def __init__(self, name):
+        self.hunger = 0
+        self.name = name
+        
+    def pet(self):
+        print("happy chicken noises")
+    
+    def update(self):
+        self.hunger +=5
+        if self.hunger < 30:
+            lukas = random.randrange(0,50)
+            if lukas<25:
+                print("bok BOK! ")
+                return 1
+            else:
+                return 0
+        
+    def feed(self, food):
+        self.hunger = self.hunger - food
+        print("peck")
+    
+    def printinfo(self):
+        print("my name is ", self.name, ".")
+        print("my hunger is", self.hunger, "    .")
+        
+c1 = Chicken("helen")
+c2 = Chicken("bob")
+c3 = Chicken("joe")
+numEggs = 0
+#game loop-----------------------------------------------
+while True:
+
+    numEggs += c1.update()
+    numEggs += c2.update()
+    numEggs += c3.update()
+   
+    print("you have, ", numEggs, " eggs!")
+    
+    choice = input("do you want to pet, feed, por check info")
+    if choice == "pet":
+        c1.pet()
+        c2.pet()
+        c3.pet()
+    if choice == "feed":
+        food = int(input("Enter food amount"))
+        c1.feed(food)
+        c2.feed(food)
+        c3.feed(food)
+    if choice == "check info":
+        c1.printinfo()
+        c2.printinfo()
+        c3.printinfo()
