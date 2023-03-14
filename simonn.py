@@ -5,9 +5,18 @@ import winsound
 pygame.init()#initializes Pygame
 pygame.display.set_caption("Simon!")#sets the window title
 screen = pygame.display.set_mode((800, 800))#creates game screen
+   
+#game variables
+xpos = 0
+ypos = 0
+mousePos = (xpos, ypos) #variable mousePos stores TWO numbers in a TUPLE
+hasClicked = False
+playerPattern = []
+turn = False
+pattern = [] #this holds the random pattern
+pi = 3.1415
+gameOver = False
 
-
-#collision definition
 def collision(xpos,ypos):
 
     if math.sqrt((xpos-400)**2 + (ypos - 400)**2)>200 or math.sqrt((xpos-400)**2 + (ypos - 400)**2)<100:
@@ -39,21 +48,8 @@ def collision(xpos,ypos):
         pygame.draw.arc(screen, (0, 0, 255), (200, 200, 400, 400), (3*pi/2), 0, 100)
         pygame.display.flip()
         winsound.Beep(840,500)
-      
         return 3
         
-        
-#game variables
-xpos = 0
-ypos = 0
-mousePos = (xpos, ypos) #variable mousePos stores TWO numbers in a TUPLE
-hasClicked = False
-playerPattern = []
-turn = False
-pattern = [] #this holds the random pattern
-pi = 3.1415
-ded = False
-
 #draw everything first so things don't appear one at a time
 pygame.draw.arc(screen, (155, 0,0), (200,200,400,400), pi/2, pi, 100)
 pygame.draw.arc(screen, (0, 155, 0), (200, 200, 400, 400), pi, (3*pi/2), 100)
@@ -68,7 +64,7 @@ pygame.display.flip()
 #gameloop###################################################
 while True:
     #print(mousePos)
-    collision(mousePos[0], mousePos[1])
+    #collision(mousePos[0], mousePos[1])
     
     event = pygame.event.wait()#event queue 
 
@@ -108,6 +104,13 @@ while True:
         print("starting machine turn")
         pattern.append(random.randrange(0, 4)) #push a new value into the pattern list
         
+        if gameOver == True:
+            windsound.Beep(400, 400)
+            pygame.time.wait(200)
+            playerPattern.clear()
+            pattern.clear()
+            gameover = False
+            playerTurn = False
         #brighten colors and play beep for each number in the pattern
         for i in range(len(pattern)): 
             if pattern[i]==0: #RED
