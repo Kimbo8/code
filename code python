@@ -1,0 +1,52 @@
+#if statements
+input = int(input("How much can you bench press?:"))
+
+if input < 10:
+    print("Keep practicing and youll get more swoll")
+elif input <= 50:
+    print("Youre getting good")
+else:
+    print("You are mega swol")
+#--------------------------------------------------------------------
+
+#for loops
+for i in range(20, 51,2): 
+    print(i)
+#--------------------------------------------------------------------
+
+
+#while loops------------------------------------------
+choice = "RIBBIT"
+
+while choice != "frog":
+   print(choice)
+   choice = input("type frog to stop")
+num = 100
+while num >= 50:
+    print(num, end = " ")
+    num-=5
+#--------------------------------------------------------------------
+
+#list--------------------------------------------------------------------
+
+marbles = [4,6,2,9]
+
+print(marbles[1])
+for i in range(len(marbles)):
+    marbles[i] *= 5
+  
+print(marbles)
+#--------------------------------------------------------------------
+
+#functions
+def AvgTwoNums(x, y):
+   return x*y/2
+
+num = int(input("enter a number"))
+num2 = int(input("enter another number"))
+print(num, "*", num2, "/2", "=", AvgTwoNums(num, num2))
+#--------------------------------------------------------------------
+
+#classes
+
+
